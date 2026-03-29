@@ -1,14 +1,15 @@
 import os
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import Update
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 from pytube import YouTube
 
 TOKEN = "8667776112:AAFeJZ-jyCHqTVtTK7cQBWM2R6su8c1KSUY"
 CHANNEL_ID = "@virallinkszone00"
 
-def start(update, context):
-    update.message.reply_text("Send me a video link or forward a video!")
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Send me a video link or forward a video!")
 
-def handle_video(update, context):
+async def handle_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = update.message.text
     try:
         yt = YouTube(url)
@@ -16,20 +17,18 @@ def handle_video(update, context):
         file_path = stream.download()
 
         # ভিডিও চ্যানেলে পাঠানো
-        context.bot.send_video(chat_id=CHANNEL_ID, video=open(file_path, 'rb'))
+        await context.bot.send_video(chat_id=CHANNEL_ID, video=open(file_path, 'rb'))
         os.remove(file_path)
     except Exception as e:
-        update.message.reply_text(f"Error: {e}")
+        await update.message.reply_text(f"Error: {e}")
 
 def main():
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
+    app = ApplicationBuilder().token(TOKEN).build()
 
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_video))
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_video))
 
-    updater.start_polling()
-    updater.idle()
+    app.run_polling()
 
 if __name__ == "__main__":
     main()
