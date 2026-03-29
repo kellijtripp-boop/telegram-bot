@@ -1,4 +1,4 @@
-python-telegram-bot==20.3
-pytube==12.1.0
-httpx~=0.24.0
-httpcore==0.17.0
+python-telegram-bot
+pytube
+httpx
+httpcore
