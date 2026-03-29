@@ -1,5 +1,6 @@
-python-telegram-bot==20.7
-moviepy
-imageio-ffmpeg
-python-telegram-bot==20.7
-httpx==0.25.2
+python-telegram-bot==20.3
+httpx==0.24.1
+moviepy==1.0.3
+imageio-ffmpeg==0.4.8
+numpy<2.0
+pillow<10.0
