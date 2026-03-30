@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 python-telegram-bot==20.7
 moviepy
 imageio-ffmpeg
 flask
+=======
+python-telegram-bot
+pytube
+httpx
+httpcore
+>>>>>>> 89837b3ed0bba2adcbe88204e7f4e43cdc10eb2e
