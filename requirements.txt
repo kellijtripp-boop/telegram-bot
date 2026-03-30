@@ -2,3 +2,4 @@ python-telegram-bot==20.7
 moviepy
 imageio-ffmpeg
 flask
+ffmpeg-python  # Add ffmpeg to the requirements
